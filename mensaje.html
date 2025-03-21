@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/6.4.0/css/all.min.css" integrity="sha512-
+    iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtA
+    c9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Mensaje</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{ 
+            background: rgb(63,94,251);
+            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+        }
+        .container{
+            background-color: white;
+            width: 700px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        h1{
+            font-size: 28px;
+            margin: 10px;
+        }
+        input {
+            width: 90%;
+            height: 40px;
+            border: 2px solid rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: rgb(219, 51, 253);
+            padding: 10px 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            font-size: 18px;
+            margin-top: 5px;
+            font-weight: 500;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            /* display: inline-block; */
+        }
+
+        .error {
+            background-color: rgb(255, 139, 139);
+            padding: 5px 0;
+            width: 70%;
+            text-align: center;
+            display: none;
+        }
+
+        h3 {
+            margin-top: 5px;
+            font-size: 22px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: rgb(255, 29, 29);
+            font-weight: bold;
+            margin-top: -5px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Un mensaje para enviar</h1>
+        <input type="text" value="" placeholder="Escribe tu mensaje...">
+        <div class="btn">Enviar</div>
+        <p class="error">Por favor ingresa un mensaje</p>
+        <h3>El ultimo mensaje fue...</h3>
+        <p class="message"></p>
+    </div>
+
+    <script>
+
+        const btnEL = document.querySelector(".btn");
+        const inputEL = document.querySelector("input");
+        const messageEL = document.querySelector(".message");
+        const errorEL = document.querySelector(".error");
+
+        btnEL.addEventListener("click", displayMessage);
+
+        function displayMessage() {
+            if (inputEL.value) {
+                messageEL.textContent = inputEL.value;
+                inputEL.value = "";
+            } else {
+                errorEL.style.display = "block";
+                setInterval(() => {
+                    errorEL.style.display = "none";
+                }, 10000);
+            }
+        }
+    </script>
+</body>
+</html>

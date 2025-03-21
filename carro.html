@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Carro</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            font-family: "Poppins", sans-serif;
+        }
+        body{ 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow-y: hidden;
+            background: linear-gradient(to top, rgba(30,30,30,.8), rgba(30,30,30,.8)), url(../imagenes/digital-art-with-urban-landscape-architecture.jpg) no-repeat center center;
+            background-size: cover;
+        }
+        .tag{
+            font-size: 0.9rem;
+            background-color: black;
+            border-radius: 5px;
+            width: 4rem;
+            display: flex;
+            justify-content: center;
+            color: #fff;
+        }
+        .product-title{
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .product-card{
+            background: #fff;
+            display: grid;
+            grid-template-rows: 55% 45%;
+            height: 80%;
+            width: 26%;
+            box-shadow: 10px 10px 25px 0px #3c3c3c;
+        }
+        .product-image{
+            background-image: url("https://i.postimg.cc/NGRJX8hr/black-benz.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 40px 10px;
+            width: 30rem;
+            height: 66%;
+        }
+        .product-description{
+            background-color: #62c256;
+            color: #fff;
+            padding-left: 20px;
+            margin-top: -67px;
+        }
+        .product-details{
+            display: flex;
+            flex-direction: column;
+            margin-top: -20px;
+        }
+        .product-image img{
+            width: 28rem;
+        }
+        .stars{
+            color: yellow;
+            font-size: 1em;
+        }
+        .colors-price{
+            display: flex;
+            align-items: center;
+            width: 70%;
+            justify-content: space-between;
+            margin-top: -15px;
+        }
+        .colors{
+            display: flex;
+            width: 6rem;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .red{
+            background: red;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+        .black{
+            background: black;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+        .gray{
+            background: gray;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+        .pricing{
+            display: flex;
+            width: 12rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .old-price{
+            font-weight: 100;
+        }
+        button{
+            cursor: pointer;
+        }
+        #button{
+            background-color: black;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+        }
+        button white-button{
+            background-color: #fff;
+        }
+        .button-text{
+            color: #fff;
+            margin-left: 5px;
+        }
+        .feedback{
+            display: none;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="product-card">
+        <div class="product-image">
+            <!--<img src="./img/azul.jpg" alt="cars"> -->
+        </div>
+        <div class="product-description">
+            <h3 class="tag">CARRO</h3>
+            <h1 class="product-title">Mazda 3 Sedan 2025</h1>
+            <p class="product-details">
+                <span class="mileage">
+                    <span style="font-size: 1em; color: black;"><i class="fa-solid fa-car"></i></span>
+                    Kilometraje: 4,000 millas
+                </span>
+                <span class="fuel">
+                    <span style="font-size: 1em; color: black;"><i class="fa-solid fa-gas-pump"></i></span>
+                    Combustible: 25mpg
+                </span>
+                <span class="safety">
+                    <span style="font-size: 1em; color: black;"><i class="fa-solid fa-shield"></i></span>Seguridad:
+                    <span class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </span>
+                </span>
+            </p>
+            <p>Escoge un color:</p>
+            <div class="colors-price">
+                <div class="colors">
+                    <span class="red"></span>
+                    <span class="gray"></span>
+                    <span class="black"></span>
+                </div>
+                <div class="pricing">
+                    <h2 class="new-price">$134,450</h2>
+                    <h4 class="old-price">$140,500</h4>
+                </div>
+            </div>
+            <button id="button">
+                <span style="font-size: 1em; color: white;">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="button-text">Agregar al carrito</span>
+            </button>
+            <button class="feedback">
+                <span id="white-button">🥳 Guao, vas a ser dueño de un Manzda🤗</span>
+            </button>
+        </div>
+    </div>
+    <script>
+
+        const redColor = document.querySelector(".red");
+        const blackColor = document.querySelector(".black");
+
+        const imageCard = document.querySelector(".product-image");
+        const feedbackBtn = document.querySelector(".feedback");
+        const grayColor = document.getElementsByClassName("gray");
+        const cartButton = document.getElementById("button")
+
+        const itemTag = document.getElementsByTagName("h3")[0];
+
+        redColor.addEventListener("click", function(){
+            cartButton.style.background = "red";
+            itemTag.style.backgroundColor = "red";
+            imageCard.style.backgroundImage = 'url("https://i.postimg.cc/cH2pJdny/red-benz.webp")'
+        });
+
+        grayColor[0].addEventListener("click", function(){
+            cartButton.style.background = "gray";
+            itemTag.style.backgroundColor = "gray";
+            imageCard.style.backgroundImage = 'url("https://i.postimg.cc/BvyYTMQ2/gray-benz.jpg")';
+        });
+
+        blackColor.addEventListener("click", function(){
+            cartButton.style.background = "black";
+            itemTag.style.backgroundColor = "black";
+            imageCard.style.backgroundImage = 'url("https://i.postimg.cc/NGRJX8hr/black-benz.jpg")';
+        });
+
+        const cart = () => {
+            cartButton.style.display = "none";
+            feedbackBtn.style.display = "block";
+        };
+        cartButton.addEventListener("click", cart);
+
+        const feedback = () => {
+            cartButton.style.display = "block";
+            feedbackBtn.style.display = "none";
+        };
+        feedbackBtn.addEventListener("click", feedback);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paises</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: blueviolet;
+        }
+
+        .container {
+            width: 500px;
+            min-height: 150px;
+            padding: 20px;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        }
+        h1 {
+            color: blueviolet;
+            text-transform: uppercase;
+            text-shadow: 1px 1px black;
+            margin-bottom: 1.5rem;
+        }
+
+        .container-busqueda {
+            display: grid;
+            grid-template-columns: 9fr 3fr;
+            gap: 2rem;
+        }
+
+        input {
+            padding: 5px 10px;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid blueviolet;
+        }
+
+        button {
+            background-color: blueviolet;
+            border: none;
+            color: white;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .resultado {
+            margin-top: 10px;
+        }
+        .resultado .flag-img {
+            display: block;
+            width: 45%;
+            min-width: 7.5em;
+            margin: 1.8em auto 1.2em auto;
+        }
+
+        .resultado h2 {
+            font-weight: 600;
+            color: #222a43;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.8em;
+        }
+
+        .resultado .data-wrapper {
+            margin-bottom: 1em;
+            letter-spacing: 0.3px;
+        }
+
+        .resultado h4 {
+            display: inline;
+            font-weight: 500;
+            color: #222a43;
+        }
+
+        .resultado span {
+            color: #5d6274;
+        }
+
+        .resultado h3 {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 400;
+            color: #ff465a;
+        }
+        .resultado .loading {
+            margin-top: 10px;
+            margin-bottom: -10px;
+            color: black;
+            font-size: 15px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guía de Países</h1>
+        <div class="container-busqueda">
+            <input type="text" id="nombre-pais" placeholder="Ingresa el nombre de un país">
+            <button class="btnBusqueda">Buscar</button>
+        </div>
+        <div class="resultado"></div>
+    </div>
+    
+
+    <script>
+
+        const inputEl = document.querySelector("#nombre-pais");
+        const searchBtnEl = document.querySelector(".btnBusqueda");
+        const result = document.querySelector(".resultado");
+
+        async function getResults() {
+            let countryName = inputEl.value;
+            try {
+                result.innerHTML = '<h2 class="loading">Cargando Resultados ...</h2>';
+                let fetchUrl = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
+                let data = await fetch(fetchUrl).then((res) => res.json());
+
+                result.innerHTML = `
+                <img src="${data[0].flags.svg}" class="flag-img">
+                <h2>${data[0].name.common}</h2>
+                <div class="wrapper">
+                    <div class="data-wrapper">
+                        <h4>Capital:</h4>
+                        <span>${data[0].capital[0]}</span>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="data-wrapper">
+                        <h4>Continente:</h4>
+                        <span>${data[0].continents[0]}</span>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="data-wrapper">
+                        <h4>Población:</h4>
+                        <span>${data[0].population}</span>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="data-wrapper">
+                        <h4>Moneda:</h4>
+                        <span>${data[0].currencies[Object.keys(data[0].currencies)].name} 
+                        (${Object.keys(data[0].currencies)[0]})</span>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="data-wrapper">
+                        <h4>Idiomas:</h4>
+                        <span>${Object.values(data[0].languages).toString().split(",").join(", ")}</span>
+                    </div>
+                </div>
+                `;
+            } catch (error) {
+                if (countryName.length == 0) {
+                    result.innerHTML = '<h3>El campo no puede estar vacío</h3>';
+                } else {
+                    result.innerHTML = '<h3>Por favor ingrese un país correcto.</h3>';
+                }
+            }
+        }
+        searchBtnEl.addEventListener("click", getResults);
+
+
+    </script>
+    
+</body>
+</html>

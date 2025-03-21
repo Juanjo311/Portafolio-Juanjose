@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/6.4.0/css/all.min.css" integrity="sha512-
+    iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtA
+    c9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Galeria</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+        }
+        .image-container{
+            position: relative;
+            width: 200px;
+            min-height: 200px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: all 1s ease-in-out;
+        }
+        .image-container span{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+        }
+        .image-container span img{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+        .buttons{
+            position: relative;
+            width: 80%;
+        }
+        .btn{
+            position: absolute;
+            bottom: -80px;
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover{
+            filter: brightness(1.5);
+        }
+        .btn:active{
+            transform: scale(0.95);
+        }
+        .prev{
+            left: 20%;
+        }
+        .next{
+            right: 20%;
+        }
+    
+    </style>
+
+</head>
+<body>
+    <div class="image-container">
+        <span style="--i: 1">
+            <img src="https://img.freepik.com/fotos-premium/arboles-que-crecen-bosque_1048944-30368869.jpg?w=996">
+        </span>
+
+        <span style="--i: 2">
+            <img src="https://img.freepik.com/foto-gratis/familia-tiro-completo-corriendo-pradera_23-2149049202.jpg?t=st=1741919960~exp=1741923560~hmac=d29f44155f9fb4e0d831923ef9706f002f806cfc22868ddc1cd5e95fd87c8c55&w=996">
+        </span>
+
+        <span style="--i: 3">
+            <img src="https://img.freepik.com/foto-gratis/forrajeo-coati-hocico-blanco-naturaleza_493961-1319.jpg?t=st=1741920292~exp=1741923892~hmac=64bc6108133d9c9f962d0d14454eff204b6faa471b91d5e5c6b6b3a26acd61b5&w=996">
+        </span>
+
+        <span style="--i: 4">
+            <img src="https://img.freepik.com/fotos-premium/musgo-verde-tronco-arbol-podrido-bosque_1048944-30372317.jpg?w=996">
+        </span>
+
+        <span style="--i: 5">
+            <img src="https://img.freepik.com/foto-gratis/hermoso-paisaje-madre-naturaleza_23-2148992406.jpg?t=st=1741920049~exp=1741923649~hmac=60afc256f48cc6ab595a5242d7dcd658c4f1713fb445bd299841d59a4726362a&w=996">
+        </span>
+
+        <span style="--i: 6">
+            <img src="https://img.freepik.com/fotos-premium/primer-plano-ardilla-poste-madera_1048944-30370286.jpg?w=996">
+        </span>
+
+        <span style="--i: 7">
+            <img src="https://img.freepik.com/fotos-premium/nino-padre-plano-completo-que-viven-campo_23-2150642400.jpg?w=996">
+        </span>
+
+        <span style="--i: 8">
+            <img src="https://img.freepik.com/foto-gratis/retrato-adorable-mapache-estanque_181624-47273.jpg?t=st=1741920126~exp=1741923726~hmac=d7639a61200fd79ca4c7d77d3d533537cd25e544db6954b3d9a474d6173375b0&w=996">
+        </span>
+    </div>
+    <div class="buttons">
+        <button class="btn prev">Anterior</button>
+        <button class="btn next">Siguiente</button>
+    </div>
+
+    <script>
+
+        const imageContainerEl = document.querySelector(".image-container");
+        const prevEl = document.querySelector(".prev");
+        const nextEl = document.querySelector(".next");
+
+        let x=0;
+        let timer=0;
+
+        prevEl.addEventListener("click",()=>{
+            x = x + 45;
+            clearTimeout(timer);
+            updateContainer();
+        })
+
+        nextEl.addEventListener("click",()=>{
+            x = x - 45;
+            clearTimeout(timer);
+            updateContainer();
+        })
+
+        function updateContainer(){
+            imageContainerEl.style.transform = `perspective(1000px) rotateY(${x}deg)`;
+
+            timer = setTimeout(() => {
+                x = x - 45;
+                updateContainer();
+            }, 2000);
+        }
+
+        updateContainer();
+
+    </script>
+</body>
+</html>
