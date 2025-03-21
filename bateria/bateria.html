@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/6.4.0/css/all.min.css" integrity="sha512-
+    iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtA
+    c9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Bateria</title>
+    <style>
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            
+        }
+        
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: yellow;
+        }
+
+        h1 {
+            font-style: 50px;
+            letter-spacing: 4px;
+            color: black;
+            white-space: nowrap;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            text-align: center;
+        }
+        .btn {
+            border: none;
+            padding: 30px 50px;
+            margin: 10px;
+            background-color: white;
+            font-size: 20px;
+            min-width: 200px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+            text-transform: capitalize;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .btn:active {
+            background-size: 105%;
+        }
+        .text-overlay {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h1 >Drum Kits <i class="fas fa-drum"></i></h1>
+    <div class="container">
+    </div>
+
+
+
+    <script>
+
+        const kits = ["kick", "tom", "crash", "snare"];
+        const containerEl = document.querySelector(".container");
+
+        kits.forEach((kit) => {
+            const btnEl = document.createElement("button");
+            btnEl.classList.add("btn");
+            containerEl.appendChild(btnEl);
+            btnEl.innerText = kit;
+            
+            btnEl.style.backgroundImage = `url(./images/${kit}.jpg)`;
+            
+            const audioEl = document.createElement("audio");
+            audioEl.src = `sounds/${kit}.mp3`;
+            containerEl.appendChild(audioEl);
+
+            btnEl.addEventListener("click", () => {
+                audioEl.play();
+            });
+        });
+
+        // El sonido lo podremos reproducir con las iniciales de nuestros sonidos. Letras k - t - c - s
+        document.addEventListener("keydown", (e) => {
+            if (e.key == kits.find(kit => kit.startsWith(e.key))) {
+                const btnEl = document.querySelector(`.btn:nth-child(${kits.indexOf(e.key) + 1})`);
+                const audioEl = document.querySelector(`audio:nth-child(${kits.indexOf(e.key) + 1})`);
+                
+                if (audioEl) {
+                    audioEl.play();
+                }
+
+                if (btnEl) {
+                    btnEl.style.transform = "scale(0.9)";
+                    setTimeout(() => {
+                        btnEl.style.transform = "scale(1)";
+                    }, 100);
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>
